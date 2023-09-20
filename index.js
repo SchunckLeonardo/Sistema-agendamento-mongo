@@ -14,6 +14,10 @@ app.get('/', (req, res) => {
     res.send('Deu certo')
 })
 
+app.get('/cadastro', (req, res) => {
+    res.render('create.ejs')
+})
+
 app.listen(8080, () => {
     console.log('Starting server')
 })
