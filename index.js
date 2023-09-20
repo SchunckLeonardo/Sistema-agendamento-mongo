@@ -9,6 +9,7 @@ let cookieParser = require('cookie-parser')
 let secret = 'djaidjwa0iadjnonawd-09nawidn0aiwdaw'
 
 const AppointmentService = require('./services/AppointmentService')
+const AppointmentFactory = require('./factories/AppointmentFactory')
 
 mongoose.connect('mongodb://localhost:27017/agendamento')
 
@@ -50,6 +51,29 @@ app.post('/create', async (req, res) => {
 app.get('/getcalendar', async (req, res) => {
     let allAppointments = await AppointmentService.GetAll(false)
     res.json(allAppointments)
+})
+
+app.get('/appointment/:id', async (req, res) => {
+    let id = req.params.id
+    let clientAppointment = await AppointmentService.GetById(id)
+    let newClient = AppointmentFactory.Build(clientAppointment)
+    let dateUpdated = newClient.start.toLocaleDateString('en-GB')
+    res.render('client.ejs', { clientAppointment, dateUpdated })
+})
+
+app.post('/update', async (req, res) => {
+    let { id, email, name, cpf, description, date, time, finished } = req.body
+    if(finished == 'on') {
+        finished = true
+    } else {
+        finished = false
+    }
+    try {
+        await AppointmentService.Update(id, name, email, cpf, description, date, time, finished)
+        res.redirect('/')
+    } catch(err) {
+        res.redirect(`/appointment/${id}`)
+    }
 })
 
 app.listen(8080, () => {

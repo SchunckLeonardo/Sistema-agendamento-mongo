@@ -39,7 +39,10 @@
         let calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: 'dayGridMonth',
             locale: 'pt-br',
-            events: '/getcalendar'
+            events: '/getcalendar',
+            eventClick(info) {
+                window.location.href = `/appointment/${info.event.id}`
+            }
         })
         calendar.render()
     </script>
