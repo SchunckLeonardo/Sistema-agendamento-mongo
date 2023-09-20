@@ -12,13 +12,15 @@
 
     <div class="container mt-5">
         <h1 class="display-2 text-center mb-5 border-bottom border-3 border-dark">Cadastro de consulta</h1>
-        <form>
-            <input type="text" name="name" id="name" placeholder="Nome do paciente" class="form-control mb-3">
-            <input type="email" name="email" id="email" placeholder="Digite o email do paciente"
+        <form action="create" method="POST">
+            <input type="text" name="name" id="name" placeholder="Nome do paciente"
                 class="form-control mb-3">
-            <input type="text" name="cpf" id="cpf" placeholder="Digite o CPF do paciente" class="form-control mb-3">
-            <input type="text" name="description" id="description" placeholder="Digite o tipo da consulta"
+            <input type="email" name="email" id="email"
+                placeholder="Digite o email do paciente" class="form-control mb-3">
+            <input type="text" name="cpf" id="cpf" placeholder="Digite o CPF do paciente"
                 class="form-control mb-3">
+            <input type="text" name="description" id="description"
+                placeholder="Digite o tipo da consulta" class="form-control mb-3">
             <input type="date" name="date" id="date" class="form-control mb-3">
             <input type="time" name="time" id="time" class="form-control mb-3">
             <button class="btn btn-lg btn-dark w-100">Agendar</button>

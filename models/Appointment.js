@@ -6,7 +6,8 @@ let appointment = new mongoose.Schema({
     cpf: String,
     description: String,
     date: Date,
-    time: String
+    time: String,
+    finished: Boolean
 })
 
-module.export = appointment
+module.exports = appointment
