@@ -28,7 +28,7 @@ app.use(session({
 app.use(flash())
 
 app.get('/', (req, res) => {
-    res.send('Deu certo')
+    res.render('index.ejs')
 })
 
 app.get('/cadastro', (req, res) => {
