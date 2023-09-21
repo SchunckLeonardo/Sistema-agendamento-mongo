@@ -18,29 +18,44 @@
                 </h1>
             </div>
         </div>
-        <div class="row bg-secondary rounded p-5">
+        <div class="row bg-dark rounded p-5">
             <div class="col-lg-12">
                 <h3 class="display-5 text-light text-center">Informações</h3>
                 <form action="/update" method="POST">
-                    <input type="hidden" name="id" value="<%= clientAppointment._id %>">
-                    <label class="form-label text-light" for="email">E-mail:</label>
-                    <input class="form-control mb-3" type="text" name="email" value="<%= clientAppointment.email %>">
-                    <label class="form-label text-light" for="name">Nome:</label>
-                    <input class="form-control mb-3" type="text" name="name" value="<%= clientAppointment.name %>">
-                    <label class="form-label text-light" for="cpf">CPF:</label>
-                    <input class="form-control mb-3" type="text" name="cpf" value="<%= clientAppointment.cpf %>">
-                    <label class="form-label text-light" for="description">Descrição:</label>
-                    <input class="form-control mb-3" type="text" name="description"
-                        value="<%= clientAppointment.description %>">
-                    <label class="form-label text-light" for="date">Data:</label>
-                    <input class="form-control mb-3" type="date" value="<%= dateUpdated.split('/').reverse().join('-') %>" name="date">
-                    <label class="form-label text-light" for="time">Horário:</label>
-                    <input class="form-control mb-3" type="text" name="time" value="<%= clientAppointment.time %>">
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" name="finished">
-                        <label class="form-check-label text-light" for="flexSwitchCheckDefault">Finalizado</label>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <input type="hidden" name="id" value="<%= clientAppointment._id %>">
+                            <label class="form-label text-light" for="email">E-mail:</label>
+                            <input class="form-control mb-3" type="text" name="email"
+                                value="<%= clientAppointment.email %>">
+                            <label class="form-label text-light" for="name">Nome:</label>
+                            <input class="form-control mb-3" type="text" name="name"
+                                value="<%= clientAppointment.name %>">
+                            <label class="form-label text-light" for="cpf">CPF:</label>
+                            <input class="form-control mb-3" type="text" name="cpf"
+                                value="<%= clientAppointment.cpf %>">
+                            <label class="form-label text-light" for="description">Descrição:</label>
+                            <input class="form-control mb-3" type="text" name="description"
+                                value="<%= clientAppointment.description %>">
+                            <label class="form-label text-light" for="date">Data:</label>
+                            <input class="form-control mb-3" type="date"
+                                value="<%= dateUpdated.split('/').reverse().join('-') %>" name="date">
+                            <label class="form-label text-light" for="time">Horário:</label>
+                            <input class="form-control mb-3" type="text" name="time"
+                                value="<%= clientAppointment.time %>">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch"
+                                    id="flexSwitchCheckDefault" name="finished">
+                                <label class="form-check-label text-light"
+                                    for="flexSwitchCheckDefault">Finalizado</label>
+                            </div>
+                        </div>
                     </div>
-                    <button class="btn btn-primary w-100 btn-lg mt-5">Atualizar</button>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <button class="btn btn-primary w-100 btn-lg mt-5">Atualizar</button>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>

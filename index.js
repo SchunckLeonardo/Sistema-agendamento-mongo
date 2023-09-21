@@ -76,6 +76,11 @@ app.post('/update', async (req, res) => {
     }
 })
 
+app.get('/list', async (req, res) => {
+    let allAppointments = await AppointmentService.GetAll(true)
+    res.render('list.ejs', {allAppointments})
+})
+
 app.listen(8080, () => {
     console.log('Starting server')
 })
