@@ -74,6 +74,16 @@ class AppointmentService {
         }
     }
 
+    async Search(query) {
+        try {
+            let appo = await AppointmentModel.find().or([{email: query}, {cpf: query}])
+            return appo
+        } catch(err) {
+            console.log(err)
+            return []
+        }
+    }
+
 }
 
 module.exports = new AppointmentService()

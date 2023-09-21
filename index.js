@@ -78,7 +78,15 @@ app.post('/update', async (req, res) => {
 
 app.get('/list', async (req, res) => {
     let allAppointments = await AppointmentService.GetAll(true)
-    res.render('list.ejs', {allAppointments})
+    let searchRoute = false
+    res.render('list.ejs', {allAppointments, searchRoute})
+})
+
+app.get('/searchlist', async (req, res) => {
+    let query = req.query.search
+    let searchRoute = true
+    let allAppointments = await AppointmentService.Search(query)
+    res.render('list.ejs', {allAppointments, searchRoute})
 })
 
 app.listen(8080, () => {
