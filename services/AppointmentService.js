@@ -1,5 +1,6 @@
 let mongoose = require('mongoose')
 let appointmentSchema = require('../models/Appointment')
+let mailer = require('nodemailer')
 
 let AppointmentModel = mongoose.model("Appointments", appointmentSchema)
 
@@ -15,7 +16,8 @@ class AppointmentService {
             description,
             date,
             time,
-            finished: false
+            finished: false,
+            notified: false
         })
 
         try {
@@ -68,7 +70,7 @@ class AppointmentService {
                 finished
             })
             return true
-        } catch(err) {
+        } catch (err) {
             console.log(err)
             return false
         }
@@ -76,12 +78,46 @@ class AppointmentService {
 
     async Search(query) {
         try {
-            let appo = await AppointmentModel.find().or([{email: query}, {cpf: query}])
+            let appo = await AppointmentModel.find().or([{ email: query }, { cpf: query }])
             return appo
-        } catch(err) {
+        } catch (err) {
             console.log(err)
             return []
         }
+    }
+
+    async SendNotification() {
+        let allAppointments = await this.GetAll(false)
+
+        let transporter = mailer.createTransport({
+            host: "sandbox.smtp.mailtrap.io",
+            port: 587,
+            auth: {
+                user: "ec9db8e8ea0ae2",
+                pass: "a199573ddb1e79"
+            }
+        })
+
+        allAppointments.forEach(async appointment => {
+            let date = appointment.start
+            let hour = 1000 * 60 * 60
+            let gap = date - Date.now()
+
+            if (gap <= hour) {
+                if (!appointment.notified) {
+                    transporter.sendMail({
+                        from: "Leonardo Rainha <schunckrainhaleonardo@gmail.com>",
+                        to: appointment.email,
+                        subject: "Sua consulta vai acontecer em breve",
+                        text: "Daqui 1 hora será a sua consulta. Fique esperto!"
+                    })
+                    console.log("O paciente foi notificado!")
+                    await AppointmentModel.findByIdAndUpdate(appointment.id, { notified: true })
+                }
+            }
+
+        })
+
     }
 
 }

@@ -89,6 +89,14 @@ app.get('/searchlist', async (req, res) => {
     res.render('list.ejs', {allAppointments, searchRoute})
 })
 
+let pollTime = 5000
+
+setInterval( async () => {
+
+    await AppointmentService.SendNotification()
+
+}, pollTime)
+
 app.listen(8080, () => {
     console.log('Starting server')
 })
